@@ -62,6 +62,19 @@ shapes.SpringBot = function(model, def)
 	return body, 3
 end
 
+-- Bolt Bot: a squat junk robot with a big wrench for a right hand.
+shapes.BoltBot = function(model, def)
+	local body = part(model, nil, "Body", Vector3.new(1.6, 1.4, 1.2), CFrame.new(0, 1.1, 0), Color3.fromRGB(140, 120, 100), Enum.Material.CorrodedMetal)
+	head(model, body, 2.2, Vector3.new(1.2, 0.8, 1), def.Accent)
+	for _, x in { -0.45, 0.45 } do
+		part(model, body, "Leg", Vector3.new(0.4, 0.4, 0.5), CFrame.new(x, 0.2, 0), DARK)
+	end
+	part(model, body, "Arm", Vector3.new(0.3, 0.3, 1), CFrame.new(1, 1.2, -0.4), DARK)
+	local jaw = part(model, body, "WrenchHead", Vector3.new(0.3, 0.7, 0.7), CFrame.new(1, 1.2, -1.05) * CFrame.Angles(0, 0, math.pi / 2), def.Accent, Enum.Material.Metal)
+	jaw.Shape = Enum.PartType.Cylinder
+	return body, 2.6
+end
+
 export type Built = {
 	Model: Model,
 	Body: BasePart,
@@ -71,7 +84,7 @@ export type Built = {
 function RobotModels.Build(def: RobotDef): Built
 	local model = Instance.new("Model")
 	model.Name = def.Name
-	local build = shapes[def.Key] or shapes.SpringBot
+	local build = shapes[def.Key] or shapes.BoltBot
 	local body, height = build(model, def)
 	body.Anchored = true
 	model.PrimaryPart = body

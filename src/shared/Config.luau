@@ -28,7 +28,7 @@ export type LayerDef = {
 
 -- One straight line of layers. Deeper means a faster Warden and better robots.
 Config.Layers = {
-	{ Name = "Scrapyard", Zone = "Amber", WardenSpeed = 9, Robot = "SpringBot", ArchColor = Color3.fromRGB(90, 140, 220) },
+	{ Name = "Scrapyard", Zone = "Amber", WardenSpeed = 9, Robot = "BoltBot", ArchColor = Color3.fromRGB(90, 140, 220) },
 	{ Name = "Assembly Hall", Zone = "Amber", WardenSpeed = 11, Robot = "SpringBot", ArchColor = Color3.fromRGB(150, 100, 220) },
 	{ Name = "Maintenance Tunnels", Zone = "Red", WardenSpeed = 12.5, Robot = "SpringBot", ArchColor = Color3.fromRGB(60, 190, 200) },
 	{ Name = "Loading Yard", Zone = "Red", WardenSpeed = 14.5, Robot = "SpringBot", ArchColor = Color3.fromRGB(220, 110, 180) },
@@ -81,6 +81,8 @@ Config.Net = {
 	PairCooldown = 600, -- one player can take a haul from the same player once per 10 minutes
 	HourlyLossCap = 3, -- hauls a player can lose to nets in a rolling hour
 }
+
+Config.RevealTime = 3
 
 Config.Hazards = {
 	SweepPeriod = 12,

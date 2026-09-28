@@ -1,6 +1,6 @@
 --!strict
 -- Robot data. Each robot is one row here plus a shape in RobotModels.
--- The greybox uses Spring Bot only; the rest of the catalogue slots in as rows.
+-- The greybox only needs two robots; the rest of the catalogue slots in as rows.
 
 export type RobotDef = {
 	Key: string,
@@ -8,7 +8,7 @@ export type RobotDef = {
 	Tier: number,
 	Pad: "S" | "M" | "L",
 	Transport: string,
-	Behaviour: "Bounce",
+	Behaviour: "Bounce" | "RattleOnSprint",
 	BehaviourText: string,
 	Job: string,
 	BaseValue: number,
@@ -18,6 +18,18 @@ export type RobotDef = {
 }
 
 local RobotDefs: { [string]: RobotDef } = {
+	BoltBot = {
+		Key = "BoltBot",
+		Name = "Bolt Bot",
+		Tier = 1,
+		Pad = "S",
+		Transport = "Carry",
+		Behaviour = "RattleOnSprint",
+		BehaviourText = "Rattles whenever you sprint, showing you to everyone",
+		Job = "Scrap Line: Sort",
+		BaseValue = 70,
+		Accent = Color3.fromRGB(255, 190, 60),
+	},
 	SpringBot = {
 		Key = "SpringBot",
 		Name = "Spring Bot",

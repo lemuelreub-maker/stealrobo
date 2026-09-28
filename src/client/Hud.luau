@@ -250,7 +250,7 @@ local function update()
 			rhythmFill.BackgroundColor3 = if windUp then Color3.fromRGB(255, 230, 60) else WHITE
 			behaviourLabel.Text = if windUp then "BOUNCE!" else ("Bounces every %.1f s"):format(period)
 		else
-			behaviourLabel.Text = ""
+			behaviourLabel.Text = if player:GetAttribute("Behaviour") == "RattleOnSprint" then "Sprinting rattles it and shows you to everyone" else ""
 		end
 
 		local ends = number("CarryEndsAt")
