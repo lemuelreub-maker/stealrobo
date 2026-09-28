@@ -77,6 +77,25 @@ local function characterParts(player: Player): (Model?, Humanoid?, BasePart?)
 	return character, humanoid, root
 end
 
+-- Shows each player's current run speed in the leaderboard.
+local function setupLeaderstats(player: Player)
+	local stats = Instance.new("Folder")
+	stats.Name = "leaderstats"
+	local speed = Instance.new("IntValue")
+	speed.Name = "Speed"
+	speed.Value = M.Walk
+	speed.Parent = stats
+	stats.Parent = player
+end
+
+local function showSpeed(player: Player, walkSpeed: number)
+	local stats = player:FindFirstChild("leaderstats")
+	local speed = stats and stats:FindFirstChild("Speed")
+	if speed and speed:IsA("IntValue") then
+		speed.Value = math.floor(walkSpeed + 0.5)
+	end
+end
+
 local function applyMovement(player: Player)
 	local _, humanoid = characterParts(player)
 	if not humanoid then
@@ -91,6 +110,7 @@ local function applyMovement(player: Player)
 	end
 	humanoid.UseJumpPower = false
 	humanoid.JumpHeight = if carrying then M.JumpHeight * M.CarryJumpScale else M.JumpHeight
+	showSpeed(player, humanoid.WalkSpeed)
 end
 
 local CARRY_ATTRIBUTES = { "Carrying", "Behaviour", "RhythmStart", "RhythmPeriod", "BounceHeight", "CarryEndsAt", "WardenState", "WardenBootEndsAt", "WardenDistance", "Spotted" }
@@ -576,6 +596,7 @@ function RobotService.Init(d: Deps)
 	end
 	local function onPlayer(player: Player)
 		player:SetAttribute("SecuredCount", 0)
+		setupLeaderstats(player)
 		player.CharacterAdded:Connect(function(character)
 			onCharacter(player, character)
 		end)

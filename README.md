@@ -108,7 +108,8 @@ overlaps anything you've built, and every player spawns in their own workshop.
   Walk into your own workshop past the loading-bay line to secure the robot.
 - **Spring Bot** bounces you 9 studs every 2.5 s; the bar on the HUD warns you.
   **Bolt Bot** rattles when you sprint, lighting you up for everyone.
-- **Speedometer** (top left) shows how fast you're moving in studs per second.
+- **Speed** in the leaderboard (top right) shows each player's run speed: 16 walking,
+  22 sprinting, 14 / 19 while carrying a robot.
 - **Tag Net**: fire it inside the factory at another player who is carrying a
   robot. They drop it, get 3 s to grab it back, then anyone can take it. Netted
   players are immune for 20 s (blue outline).
