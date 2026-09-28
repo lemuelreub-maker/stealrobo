@@ -8,9 +8,18 @@ A Roblox game whose code lives in this repo and is synced into Roblox Studio wit
 
 1. Install [Git](https://git-scm.com/downloads) and [VS Code](https://code.visualstudio.com/).
 2. In VS Code, open the Extensions tab and install **Rojo** (by evaera).
-3. Install the Rojo plugin in Studio: open Roblox Studio, go to the **Plugins** tab,
-   click **Manage Plugins**, find **Rojo**, and install it. You can also get it from
-   the Creator Store.
+3. Install the Rojo Studio plugin. It doesn't need to come from the Creator Store.
+   Use any one of these:
+   - **VS Code (easiest):** press `Ctrl+Shift+P` (`Cmd+Shift+P` on Mac), run
+     **Rojo: Open Menu**, and click **Install Roblox Studio plugin**.
+   - **Command line:** if you have the Rojo CLI, run `rojo plugin install`.
+   - **By hand:** download `Rojo.rbxm` from the
+     [Rojo GitHub releases](https://github.com/rojo-rbx/rojo/releases). In Studio,
+     open the **Plugins** tab, click **Plugins Folder**, and drop the file in.
+
+   Restart Studio afterwards. Only use the official plugin from the Rojo GitHub
+   or the Rojo tools above. Copies on the Creator Store from other uploaders can
+   be fake or malicious.
 
 ### 2. Get the code
 
