@@ -1,0 +1,11 @@
+# Build output
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+*.rbxl.lock
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
