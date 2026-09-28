@@ -3,6 +3,7 @@
 -- layers in a straight line along +Z. Everything is plain blocks so the
 -- layout can be judged before any art exists.
 
+local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Config = require(ReplicatedStorage.Shared.Config)
@@ -277,14 +278,16 @@ local function buildTunnels(folder: Instance, a: number)
 	end
 end
 
--- Layer 4: conveyors on both sides push you deeper; crates slalom down the middle.
+-- Layer 4: treadmills on both sides hold you in place (step off sideways);
+-- crates slalom down the middle.
 local function buildLoadingYard(folder: Instance, a: number)
 	for _, side in { -1, 1 } do
-		local belt = block(folder, "Conveyor", Vector3.new(20, 0.4, 70), Vector3.new(side * 20, 0.2, a + 45), Color3.fromRGB(45, 45, 50), Enum.Material.DiamondPlate)
-		belt.AssemblyLinearVelocity = Vector3.new(0, 0, Config.Hazards.ConveyorSpeed)
-		for k = 0, 6 do
-			local arrow = block(folder, "ConveyorArrow", Vector3.new(4, 0.1, 1), Vector3.new(side * 20, 0.45, a + 15 + k * 10), Color3.fromRGB(200, 200, 210), Enum.Material.Neon)
-			arrow.CanCollide = false
+		local belt = block(folder, "Treadmill", Vector3.new(20, 0.4, 70), Vector3.new(side * 20, 0.2, a + 45), Color3.fromRGB(45, 45, 50), Enum.Material.DiamondPlate)
+		CollectionService:AddTag(belt, "Treadmill")
+		for k = 0, 13 do
+			local slat = block(folder, "TreadmillSlat", Vector3.new(20, 0.1, 0.6), Vector3.new(side * 20, 0.45, a + 12 + k * 5), Color3.fromRGB(80, 80, 88))
+			slat.CanCollide = false
+			slat.CanQuery = false
 		end
 	end
 	for k, z in { 15, 27, 39, 51, 63, 75 } do

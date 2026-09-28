@@ -36,6 +36,9 @@ local rhythmFill: Frame
 local behaviourLabel: TextLabel
 local batteryLabel: TextLabel
 local netLabel: TextLabel
+local speedNeedle: Frame
+local speedNumber: TextLabel
+local shownSpeed = 0
 local toastList: Frame
 local netArrow: TextLabel
 local netWarnUntil = 0
@@ -104,6 +107,40 @@ local function build()
 	chipCorner.Parent = zoneChip
 	statsLabel = label(status, UDim2.new(1, -12, 0, 22), UDim2.fromOffset(6, 34), 14, Enum.Font.Gotham)
 	statsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+	-- Under that: a speedometer showing how fast you're moving.
+	local speed = panel(gui, UDim2.fromOffset(150, 64), UDim2.fromOffset(12, 82), Vector2.zero)
+	local dial = Instance.new("Frame")
+	dial.Size = UDim2.fromOffset(52, 52)
+	dial.Position = UDim2.fromOffset(6, 6)
+	dial.BackgroundColor3 = Color3.fromRGB(40, 42, 50)
+	dial.Parent = speed
+	local round = Instance.new("UICorner")
+	round.CornerRadius = UDim.new(0.5, 0)
+	round.Parent = dial
+	local ring = Instance.new("UIStroke")
+	ring.Color = Color3.fromRGB(120, 200, 255)
+	ring.Thickness = 2
+	ring.Parent = dial
+	speedNeedle = Instance.new("Frame")
+	speedNeedle.Size = UDim2.fromOffset(3, 22)
+	speedNeedle.AnchorPoint = Vector2.new(0.5, 1)
+	speedNeedle.Position = UDim2.fromScale(0.5, 0.5)
+	speedNeedle.BackgroundColor3 = WHITE
+	speedNeedle.BorderSizePixel = 0
+	speedNeedle.Parent = dial
+	local hub = Instance.new("Frame")
+	hub.Size = UDim2.fromOffset(8, 8)
+	hub.AnchorPoint = Vector2.new(0.5, 0.5)
+	hub.Position = UDim2.fromScale(0.5, 0.5)
+	hub.BackgroundColor3 = WHITE
+	hub.Parent = dial
+	local hubRound = Instance.new("UICorner")
+	hubRound.CornerRadius = UDim.new(0.5, 0)
+	hubRound.Parent = hub
+	speedNumber = label(speed, UDim2.fromOffset(80, 32), UDim2.fromOffset(64, 6), 28, Enum.Font.GothamBlack)
+	local unit = label(speed, UDim2.fromOffset(80, 18), UDim2.fromOffset(64, 38), 14, Enum.Font.Gotham)
+	unit.Text = "studs/s"
 
 	-- Top centre: the Warden.
 	wardenLabel = label(gui, UDim2.fromOffset(420, 34), UDim2.new(0.5, 0, 0, 12), 24, Enum.Font.GothamBlack)
@@ -213,7 +250,7 @@ local function update()
 			rhythmFill.BackgroundColor3 = if windUp then Color3.fromRGB(255, 230, 60) else WHITE
 			behaviourLabel.Text = if windUp then "BOUNCE!" else ("Bounces every %.1f s"):format(period)
 		else
-			behaviourLabel.Text = if player:GetAttribute("Behaviour") == "RattleOnSprint" then "Sprinting rattles it and shows you to everyone" else ""
+			behaviourLabel.Text = ""
 		end
 
 		local ends = number("CarryEndsAt")
@@ -246,6 +283,20 @@ local function update()
 		wardenLabel.Text = ""
 		spottedBar.Visible = false
 	end
+
+	-- Speedometer: horizontal speed, smoothed so the needle doesn't jitter.
+	local character = player.Character
+	local root = character and character:FindFirstChild("HumanoidRootPart")
+	local speed = 0
+	if root and root:IsA("BasePart") then
+		local v = root.AssemblyLinearVelocity
+		speed = Vector3.new(v.X, 0, v.Z).Magnitude
+	end
+	shownSpeed += (speed - shownSpeed) * 0.25
+	local top = Config.Movement.Sprint
+	speedNeedle.Rotation = -120 + 240 * math.clamp(shownSpeed / top, 0, 1)
+	speedNeedle.BackgroundColor3 = if shownSpeed >= Config.Movement.CarrySprint - 0.5 then Color3.fromRGB(120, 200, 255) else WHITE
+	speedNumber.Text = tostring(math.floor(shownSpeed + 0.5))
 
 	local ok, text = Controls.CanNet()
 	netLabel.Text = text

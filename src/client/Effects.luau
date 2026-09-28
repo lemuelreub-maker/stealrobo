@@ -2,7 +2,6 @@
 -- Robot behaviours that must run on the carrier's own machine (the character
 -- is physically simulated there), plus outlines everyone sees:
 --   * Spring Bot bounces on a fixed beat
---   * revealed carriers glow yellow for everyone
 --   * recently netted players get a blue outline (net immunity)
 
 local Players = game:GetService("Players")
@@ -12,7 +11,6 @@ local player = Players.LocalPlayer
 
 local Effects = {}
 
-local REVEAL = Color3.fromRGB(255, 230, 60)
 local IMMUNE = Color3.fromRGB(70, 150, 255)
 
 local lastPhase = 0
@@ -75,10 +73,9 @@ local function updateOutline(other: Player, t: number)
 	if not character then
 		return
 	end
-	local revealed = other ~= player and (tonumber(other:GetAttribute("RevealedUntil")) or 0) > t
 	local immune = (tonumber(other:GetAttribute("NetImmuneUntil")) or 0) > t
 	local highlight = character:FindFirstChild("StealABotOutline")
-	if not revealed and not immune then
+	if not immune then
 		if highlight then
 			highlight:Destroy()
 		end
@@ -88,17 +85,9 @@ local function updateOutline(other: Player, t: number)
 		local h = Instance.new("Highlight")
 		h.Name = "StealABotOutline"
 		h.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-		h.Parent = character
-		highlight = h
-	end
-	local h = highlight :: Highlight
-	if revealed then
-		h.OutlineColor = REVEAL
-		h.FillColor = REVEAL
-		h.FillTransparency = 0.5
-	else
 		h.OutlineColor = IMMUNE
 		h.FillTransparency = 1
+		h.Parent = character
 	end
 end
 

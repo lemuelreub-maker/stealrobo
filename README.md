@@ -96,10 +96,10 @@ overlaps anything you've built, and every player spawns in their own workshop.
 
   | Layer | Hazard | Robots | Warden speed |
   | --- | --- | --- | --- |
-  | 1 Scrapyard | Scrap piles | Bolt Bot | 9 |
+  | 1 Scrapyard | Scrap piles | Spring Bot | 9 |
   | 2 Assembly Hall | Pillars and a sweep light (1.5 s in it = Warden surge) | Spring Bot | 11 |
   | 3 Maintenance Tunnels | Zigzag walls; yellow Spring gaps only a bounce clears | Spring Bot | 12.5 |
-  | 4 Loading Yard | Side conveyors push you deeper; crate slalom | Spring Bot | 14.5 |
+  | 4 Loading Yard | Side treadmills hold you in place (step off sideways); crate slalom | Spring Bot | 14.5 |
   | 5 Press Floor | Presses on a 4 s beat push you back 6 studs | Spring Bot | 16 |
 
 - **Heist rules**: hold Interact to unplug (1.5–2 s), the Warden boots for
@@ -107,7 +107,7 @@ overlaps anything you've built, and every player spawns in their own workshop.
   back to its dock (no damage, nothing lost). It stops dead at the green safe line.
   Walk into your own workshop past the loading-bay line to secure the robot.
 - **Spring Bot** bounces you 9 studs every 2.5 s; the bar on the HUD warns you.
-  **Bolt Bot** rattles when you sprint, lighting you up for everyone.
+- **Speedometer** (top left) shows how fast you're moving in studs per second.
 - **Tag Net**: fire it inside the factory at another player who is carrying a
   robot. They drop it, get 3 s to grab it back, then anyone can take it. Netted
   players are immune for 20 s (blue outline).

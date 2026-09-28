@@ -1,6 +1,6 @@
 --!strict
 -- Runs the moving hazards: the Assembly Hall sweep light and the Press Floor
--- presses. Conveyors need no code; their floor velocity does the pushing.
+-- presses. Treadmills are handled on each player's own client (Treadmill.luau).
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")

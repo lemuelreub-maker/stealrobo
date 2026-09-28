@@ -468,10 +468,6 @@ local function tickCarried(robot: Robot, player: Player, t: number)
 	end
 	player:SetAttribute("Spotted", robot.Spotted)
 
-	if robot.Def.Behaviour == "RattleOnSprint" and sprinting[player] and humanoid.MoveDirection.Magnitude > 0.1 then
-		player:SetAttribute("RevealedUntil", t + Config.RevealTime)
-	end
-
 	local plot = Plots.Of(player)
 	if plot and Map.InPlot(plot, root.Position) then
 		secure(robot, player, plot)
